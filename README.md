@@ -22,20 +22,24 @@ python main.py
 
 When prompted, enter the path to the JSON file:
 
+```
 Введите путь к json файлу данных клиента: path/to/your/json/file.json
+```
 
 Choose the type of documents to generate:
+```
 Выберите тип документов для формирования товарищу John Doe
 1 - Билет на самолет
 2 - Страховка
 3 - Бронирование отеля
 4 - Весь пакет документов
-Введите номер выбранного типа документов: 4
+```
 
 The script will generate the chosen documents and save them as PDF files in the /personal/ClientName directory.
 JSON Data Format
 The JSON file should contain the client's data in the following format:
-'''
+
+```
 json
 {
   "name": "John Doe",
@@ -44,7 +48,7 @@ json
   "timeFly": "03:00",
   ...
 }
-'''
+```
 Refer to the example JSON files provided in the repository for a complete list of fields.
 
 Document Templates
