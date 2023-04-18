@@ -17,8 +17,9 @@ python-docx
 Usage
 Place the JSON file containing the client's data in a suitable directory.
 Run the script main.py:
-
+```
 python main.py
+```
 
 When prompted, enter the path to the JSON file:
 
@@ -55,12 +56,12 @@ Refer to the example JSON files provided in the repository for a complete list o
 
 This script uses the following document templates:
 
-templateCityTravel2city.docx: Flight ticket with layovers
+* templateCityTravel2city.docx: Flight ticket with layovers
 
-templateCitytravel.docx: Flight ticket without layovers
+* templateCitytravel.docx: Flight ticket without layovers
 
-SberPolice.docx: Insurance policy
+* SberPolice.docx: Insurance policy
 
-Booking.docx: Hotel booking confirmation
+* Booking.docx: Hotel booking confirmation
 
-Customize these templates to match your desired output.
+* Customize these templates to match your desired output.
