@@ -2,19 +2,19 @@
 
 Travel Documents Generator is a Python script designed to automate the process of generating travel documents, such as flight tickets, insurance policies, and hotel bookings, using provided data in JSON format. The script reads the input JSON file and fills the corresponding document templates with the data. The generated documents are then saved as PDF files in a specified directory.
 
-## Features
+Features
 Generate flight tickets (with or without layovers)
 Generate insurance policies
 Generate hotel booking confirmations
 Generate a complete package of all three documents
 
-## Requirements
+Requirements
 Python 3.6 or higher
 docx2pdf
 docxtpl
 python-docx
 
-## Usage
+Usage
 Place the JSON file containing the client's data in a suitable directory.
 Run the script main.py:
 
@@ -24,7 +24,7 @@ When prompted, enter the path to the JSON file:
 
 Введите путь к json файлу данных клиента: path/to/your/json/file.json
 
-Choose the type of documents to generate:
+Choose the type of documents to generate.
 
 The script will generate the chosen documents and save them as PDF files in the /personal/ClientName directory.
 JSON Data Format
@@ -40,11 +40,15 @@ json
 }
 Refer to the example JSON files provided in the repository for a complete list of fields.
 
-## Document Templates
+Document Templates
 This script uses the following document templates:
 
 templateCityTravel2city.docx: Flight ticket with layovers
+
 templateCitytravel.docx: Flight ticket without layovers
+
 SberPolice.docx: Insurance policy
+
 Booking.docx: Hotel booking confirmation
+
 Customize these templates to match your desired output.
