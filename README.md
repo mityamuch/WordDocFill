@@ -65,4 +65,4 @@ This script uses the following document templates:
 
 * Booking.docx: Hotel booking confirmation
 
-* Customize these templates to match your desired output.
+Customize these templates to match your desired output.
