@@ -51,11 +51,16 @@ json
 ```
 Refer to the example JSON files provided in the repository for a complete list of fields.
 
-Document Templates
+## Document Templates
+
 This script uses the following document templates:
 
 templateCityTravel2city.docx: Flight ticket with layovers
+
 templateCitytravel.docx: Flight ticket without layovers
+
 SberPolice.docx: Insurance policy
+
 Booking.docx: Hotel booking confirmation
+
 Customize these templates to match your desired output.
