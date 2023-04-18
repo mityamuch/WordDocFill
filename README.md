@@ -9,13 +9,13 @@ Travel Documents Generator is a Python script designed to automate the process o
 * Generate hotel booking confirmations
 * Generate a complete package of all three documents
 
-Requirements
+##  Requirements
 * Python 3.6 or higher
 * docx2pdf
 * docxtpl
 * python-docx
 
-Usage
+##  Usage
 Place the JSON file containing the client's data in a suitable directory.
 Run the script main.py:
 ```
