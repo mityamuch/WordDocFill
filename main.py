@@ -57,7 +57,7 @@ def makeExchangeCityTravelticket(usr):
     docticket.render(data)
     docticket.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'))
     date = (usr["orderDate"] + usr["orderTime"]).replace(".", "").replace(':', '')
-    filename = f'{usr["orderN"]}_{date}{random.randint(1000000, 9999999)}.pdf'
+    filename = f'{usr["orderN"]}_{date}{random.randint(1000000, 9999999)}forward_aerovaucher.pdf'
     convert(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'),
             os.path.join(os.getcwd(), 'personal', usr["name"], filename))
 
@@ -96,7 +96,46 @@ def makeSimpleCityTravelTicket(usr):
     docticket.render(data)
     docticket.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'))
     date = (usr["orderDate"] + usr["orderTime"]).replace(".", "").replace(':', '')
-    filename = f'{usr["orderN"]}_{date}{random.randint(1000000, 9999999)}.pdf'
+    filename = f'{usr["orderN"]}_{date}{random.randint(1000000, 9999999)}forward_aerovaucher.pdf'
+    convert(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'),
+            os.path.join(os.getcwd(), 'personal', usr["name"], filename))
+
+
+def makeSimpleCityTravelTicketEn(usr):
+    print(f'\r[+] Заполняю билет : {usr["name"]}', end='')
+
+    data = {'tickN': usr["tickN"],
+            'aviaN': usr["aviaN"],
+            'orderN': usr["orderN"],
+            'name': usr["name"],
+            'bornDate': usr["bornDate"],
+            'passportN': usr["passportN"],
+            'timeFly': usr["timefly"],
+            'planeN': usr["planeN"],
+            'aviaComp': usr["aviaComp"],
+            'planeType': usr["planeType"],
+            'baggage': usr["baggage"],
+            'outTime': usr["outTime"],
+            'outDate': usr["outDate"],
+            'regTime': usr["regtime"],
+            'portNameS': usr["portNameS"],
+            'city': usr["city"],
+            'coutry': usr["country"],
+            'portName': usr["portName"],
+            'inTime': usr["inTime"],
+            'inDate': usr['inDate'],
+            'distance': usr['distance'],
+            'orderDate': usr["orderDate"],
+            'orderTime': usr['orderTime'],
+            'sum': usr["sum"],
+            'val': usr['val'],
+            'aviaPhone': usr['aviaPhone'],
+            }
+    docticket = DocxTemplate("templateCitytravelEn.docx")
+    docticket.render(data)
+    docticket.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'))
+    date = (usr["orderDate"] + usr["orderTime"]).replace(".", "").replace(':', '')
+    filename = f'{usr["orderN"]}_{date}{random.randint(1000000, 9999999)}forward_aerovaucher.pdf'
     convert(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'),
             os.path.join(os.getcwd(), 'personal', usr["name"], filename))
 
@@ -184,12 +223,27 @@ def filling_docs():
     choice = input("Введите номер выбранного типа документов: ")
     if choice == "1":
         print("Выбран тип документов 1")
-        if usr["planeN2"] == "":
-            print("Создаю билет без пересадки")
-            makeSimpleCityTravelTicket(usr)
+
+        print("Введите en для создание билета на английском языке")
+        print("Введите ru для создание билета на английском языке")
+        lang = input("Введите номер выбранного языка: ")
+        if lang == "en":
+            if usr["planeN2"] == "":
+                print("Создаю билет без пересадки")
+                makeSimpleCityTravelTicketEn(usr)
+            else:
+                print("Создаю билет с пересадкой")
+                #makeExchangeCityTravelticket(usr)
+        elif lang == "ru":
+            if usr["planeN2"] == "":
+                print("Создаю билет без пересадки")
+                makeSimpleCityTravelTicket(usr)
+            else:
+                print("Создаю билет с пересадкой")
+                makeExchangeCityTravelticket(usr)
         else:
-            print("Создаю билет с пересадкой")
-            makeExchangeCityTravelticket(usr)
+            print("Ошибка: неверный выбор языка")
+
 
     elif choice == "2":
         print("Выбран тип документов 2")
@@ -208,7 +262,6 @@ def filling_docs():
             print("Создаю билет с пересадкой")
             makeExchangeCityTravelticket(usr)
         makePolicy(usr)
-        makeBooking(usr)
 
     else:
         print("Ошибка: неверный выбор типа документов")
