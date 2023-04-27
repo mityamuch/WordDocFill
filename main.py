@@ -219,6 +219,31 @@ def makePolicy(usr):
             os.path.join(os.getcwd(), 'personal', usr["name"], filename))
 
 
+def makeHohlianPolicy(usr):
+    print(f'\r[+] Заполняю хохло страховку : {usr["name"]}', end='')
+
+    policydata = {
+        'policN': usr["policN"],
+        'policDate': usr["policDate"],
+        'name': (usr["enName"]).upper(),
+        'phone': usr["phone"],
+        'bornDate': usr["bornDate"],
+        'periodFrom': usr["periodFrom"],
+        'periodTo': usr["periodTo"],
+        'days': usr["days"],
+        'randomEUR': usr["randomEUR"],
+        'seriaPass': (usr["passportN"])[:2],
+        'nPass': (usr["passportN"])[:-6]
+    }
+    dochohlopolice = DocxTemplate("polisEuro.docx")
+    dochohlopolice.render(policydata)
+    dochohlopolice.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["enName"]}_policy.docx'))
+
+    filename = f'{usr["enName"]}_{usr["policN"]}_{[(random.randint(0, 10), random.randint(0, 10)) for i in range(10)]}.pdf'
+    convert(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["enName"]}_policy.docx'),
+            os.path.join(os.getcwd(), 'personal', usr["name"], filename))
+
+
 def makeBooking(usr):
     print(f'\r[+] Заполняю бронь жилья : {usr["name"]}', end='')
 
@@ -272,14 +297,15 @@ def filling_docs():
 
     print("1 - Билет на самолет")
     print("2 - Страховка")
-    print("3 - Весь пакет документов")
+    print("3 - Весь пакет документов русскому")
+    print("4 - Весь пакет документов украинцу")
 
     choice = input("Введите номер выбранного типа документов: ")
     if choice == "1":
         print("Выбран тип документов 1")
 
         print("Введите en для создание билета на английском языке")
-        print("Введите ru для создание билета на английском языке")
+        print("Введите ru для создание билета на русском языке")
         lang = input("Введите номер выбранного языка: ")
         if lang == "en":
             if usr["planeN2"] == "":
@@ -287,7 +313,7 @@ def filling_docs():
                 makeSimpleCityTravelTicketEn(usr)
             else:
                 print("Создаю билет с пересадкой")
-                # makeExchangeCityTravelticket(usr)
+                makeExchangeCityTravelticketEn(usr)
         elif lang == "ru":
             if usr["planeN2"] == "":
                 print("Создаю билет без пересадки")
@@ -298,14 +324,15 @@ def filling_docs():
         else:
             print("Ошибка: неверный выбор языка")
 
-
     elif choice == "2":
         print("Выбран тип документов 2")
-        makePolicy(usr)
-
-    elif choice == "3":
-        print("Выбран тип документов 3")
-        makeBooking(usr)
+        print("Введите 1 для создание билета на русском языке")
+        print("Введите 2 для создание билета на украинском языке")
+        lang = input("Введите номер выбранного языка: ")
+        if lang == "1":
+            makePolicy(usr)
+        else:
+            makeHohlianPolicy(usr)
 
     elif choice == "3":
         print("Выбран тип документов 3")
@@ -317,6 +344,15 @@ def filling_docs():
             makeExchangeCityTravelticket(usr)
         makePolicy(usr)
 
+    elif choice == "4":
+        print("Выбран тип документов 4")
+        if usr["planeN2"] == "":
+            print("Создаю билет без пересадки")
+            makeSimpleCityTravelTicketEn(usr)
+        else:
+            print("Создаю билет с пересадкой")
+            makeExchangeCityTravelticketEn(usr)
+        makeHohlianPolicy(usr)
     else:
         print("Ошибка: неверный выбор типа документов")
 
