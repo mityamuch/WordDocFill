@@ -110,7 +110,7 @@ def makeSimpleCityTravelTicketEn(usr):
             'name': usr["name"],
             'bornDate': usr["bornDate"],
             'passportN': usr["passportN"],
-            'timeFly': usr["timefly"],
+            'timeFly': usr["timefly"].replace("ч", "h").replace("мин", "min"),
             'planeN': usr["planeN"],
             'aviaComp': usr["aviaComp"],
             'planeType': usr["planeType"],
@@ -186,7 +186,7 @@ def makeExchangeCityTravelticketEn(usr):
             'timeTransfer': usr['timeTransfer'],
             'aviaPhone': usr['aviaPhone'],
             }
-    docticket = DocxTemplate("templateCityTravel2city.docx")
+    docticket = DocxTemplate("templateCityTravel2cityEn.docx")
     docticket.render(data)
     docticket.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["name"]}.docx'))
     date = (usr["orderDate"] + usr["orderTime"]).replace(".", "").replace(':', '')
@@ -223,6 +223,7 @@ def makeHohlianPolicy(usr):
     print(f'\r[+] Заполняю хохло страховку : {usr["name"]}', end='')
 
     policydata = {
+        'random7': random.randint(1000000, 9999999),
         'policN': usr["policN"],
         'policDate': usr["policDate"],
         'name': (usr["enName"]).upper(),
@@ -233,13 +234,13 @@ def makeHohlianPolicy(usr):
         'days': usr["days"],
         'randomEUR': usr["randomEUR"],
         'seriaPass': (usr["passportN"])[:2],
-        'nPass': (usr["passportN"])[:-6]
+        'nPass': (usr["passportN"])[2:]
     }
     dochohlopolice = DocxTemplate("polisEuro.docx")
     dochohlopolice.render(policydata)
     dochohlopolice.save(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["enName"]}_policy.docx'))
 
-    filename = f'{usr["enName"]}_{usr["policN"]}_{[(random.randint(0, 10), random.randint(0, 10)) for i in range(10)]}.pdf'
+    filename = f'{usr["enName"]}_{usr["policN"]}.pdf'
     convert(os.path.join(os.getcwd(), 'personal', usr["name"], f'{usr["enName"]}_policy.docx'),
             os.path.join(os.getcwd(), 'personal', usr["name"], filename))
 
